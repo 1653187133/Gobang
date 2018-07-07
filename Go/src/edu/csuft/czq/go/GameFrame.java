@@ -35,7 +35,7 @@ public class GameFrame extends JFrame {
 	{
 		this.goModel=goModel;
 		
-		setTitle("五子棋");
+		setTitle("五子棋--czq");
 		setSize(464, 512);
 		//屏幕大小不可改变
 		setResizable(false);
@@ -89,7 +89,10 @@ public class GameFrame extends JFrame {
 		JRadioButtonMenuItem item2 = new JRadioButtonMenuItem("人机对战");
 		menu4.add(item1);
 		menu4.add(item2);
+		
 		//难度选择
+		JRadioButtonMenuItem item4 = new JRadioButtonMenuItem("傻瓜人机");
+		JRadioButtonMenuItem item5 = new JRadioButtonMenuItem("普通人机");
 
 		//
 		ButtonGroup bg = new ButtonGroup();
@@ -107,6 +110,9 @@ public class GameFrame extends JFrame {
 				{
 					goModel.isManAgainst = false;
                     gamePanel.begin();
+                    item4.setEnabled(false);
+                    item5.setEnabled(false);
+                  
 
 					item1.setSelected(true);
 				}
@@ -124,9 +130,56 @@ public class GameFrame extends JFrame {
 				int n = JOptionPane.showOptionDialog(null,  "你选择了人机对战是否保存设置并重新开始", "对战设置", 0, 1, null, options, "保存并重新开始游戏");
 				if(n == 0)
 				{
+			        item4.setEnabled(true);
+                    item5.setEnabled(true);
 					goModel.isManAgainst = true;
+					item4.setSelected(true );
+					gamePanel.begin();
+	
+				}
+				
+			}
+		});
+
+		ButtonGroup bg1 = new ButtonGroup();
+		bg1.add(item4);
+		bg1.add(item5);
+		item4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Object[] options = { "重开游戏", "不，谢谢" };
+				int n = JOptionPane.showOptionDialog(null,  "普通人机", "对战设置", 0, 1, null, options, "保存并重新开始游戏");
+				if(n == 0)
+				{
+					goModel.isManAgainst = true;
+                    item4.setEnabled(true);
+                    item5.setEnabled(true);
+                    item4.setSelected(true );
+                    gamePanel.level = 0;
 					 gamePanel.begin();
-					 System.out.println(n);
+					
+				}
+				
+			}
+		});
+		item5.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Object[] options = { "重开游戏", "不，谢谢" };
+				int n = JOptionPane.showOptionDialog(null,  "普通人机", "对战设置", 0, 1, null, options, "保存并重新开始游戏");
+				if(n == 0)
+				{
+					goModel.isManAgainst = true;
+                    item4.setEnabled(true);
+                    item5.setEnabled(true);
+                    item5.setSelected(true );
+                    gamePanel.level = 1;
+					 gamePanel.begin();
+					
 				}
 				
 			}
@@ -136,8 +189,12 @@ public class GameFrame extends JFrame {
 
 		bar.add(menu2);
 
-		bar.add(menu3);
+		
+		
+		bar.add(item4);
+		bar.add(item5);
 		bar.add(item3);
+		bar.add(menu3);
 		}
 	
 	

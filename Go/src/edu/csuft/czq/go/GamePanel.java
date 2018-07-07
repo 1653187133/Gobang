@@ -41,6 +41,7 @@ public class GamePanel extends JPanel  {
 	/**
 	 * 使用鼠标适配器实现点击事件的监听器
 	 */
+
 	String message = "";
 	int level = 0;
 	 int[][] temporaryChess = new int[9][9];
@@ -138,35 +139,31 @@ public class GamePanel extends JPanel  {
 			}
 			if(goModel.canPlay == true )
 			{
-				machineChess();
+				machineChess(level);
 			}
 
 		
 		}
-
 	
-
-	
-		
-		
 	}
-	public void machineChess()
+	//人机算法
+	public void machineChess(int level)
 	{
 		//简单机器人
-		/*	if (gameDifficulty == 0)
+		if (level == 0)
 			{
 				
 				int i = 0 ,j = 0;
 				boolean chessSucceed = true;// 下棋成功的标志
 				while (chessSucceed)
 				{
-					i = (int) (Math.random() * 7);
-					j = (int) (Math.random() * 7);
+					i = (int) (Math.random() * 8);
+					j = (int) (Math.random() * 8);
 					if (goModel.data[i][j] == 0)
 					{
 						int m = 0, n = 0;
-						m = i*55+29;
-						n = j*55+29;
+						m = i*50+29;
+						n = j*50+29;
 						Piece piece =new Piece(n,m);
 						piece.isBlack = pieceList.size() % 2 == 0;
 						
@@ -181,11 +178,13 @@ public class GamePanel extends JPanel  {
 
 					}
 				}
-			}*/
+			}
+		if(level== 1)
+		{
 		
 				int max = 0;
 				int m = 0, n = 0;
-				int figureSort[] = new int[4];// 对棋子的四个方向进行打分
+				int figureSort[] = new int[4];// 记录棋子的四个方向的分数
 				for (int i = 0; i < 9; i++) {
 					for (int j = 0; j < 9; j++) {
 						if (goModel.data[i][j] == 0) {
@@ -222,6 +221,7 @@ public class GamePanel extends JPanel  {
 					JOptionPane.showMessageDialog(null,"游戏结束," + (goModel.data[m][n] == 1 ? "黑方" : "白方") + "获胜!");
 					goModel.canPlay = false;
 				}
+		}
 
 				
 		 
